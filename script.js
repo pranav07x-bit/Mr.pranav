@@ -1,36 +1,36 @@
-// Scroll Reveal Animation
-function reveal() {
-  const reveals = document.querySelectorAll('.reveal');
+// Scroll Reveal
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnScroll() {
   for (let i = 0; i < reveals.length; i++) {
-    let windowHeight = window.innerHeight;
-    let elementTop = reveals[i].getBoundingClientRect().top;
-    let elementVisible = 150;
-    if (elementTop < windowHeight - elementVisible) {
+    const windowHeight = window.innerHeight;
+    const elementTop = reveals[i].getBoundingClientRect().top;
+    const revealPoint = 150;
+
+    if (elementTop < windowHeight - revealPoint) {
       reveals[i].classList.add('active');
-    } else {
-      reveals[i].classList.remove('active');
     }
   }
 }
 
-window.addEventListener('scroll', reveal);
-window.addEventListener('load', reveal);
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
 
-// Skill Bar Animation
-window.addEventListener('load', () => {
-  const skillBars = document.querySelectorAll('.skill .bar i');
-  skillBars.forEach(bar => {
-    bar.style.width = bar.getAttribute('data-width');
-  });
-});
-
-// Contact Form Message Animation
-document.getElementById('sendMsg').addEventListener('click', () => {
-  const msgStatus = document.getElementById('msgStatus');
-  msgStatus.style.color = '#2575fc';
-  msgStatus.textContent = 'Message Sent Successfully!';
-  msgStatus.style.opacity = 1;
+// Skills bar animation
+const skillBars = document.querySelectorAll('.skill .bar i');
+skillBars.forEach(bar => {
+  const width = bar.getAttribute('data-width');
   setTimeout(() => {
-    msgStatus.style.opacity = 0;
-  }, 3000);
+    bar.style.width = width;
+  }, 500);
 });
+
+// Contact form button feedback
+const sendBtn = document.getElementById('sendMsg');
+if(sendBtn){
+  sendBtn.addEventListener('click', () => {
+    const msgStatus = document.getElementById('msgStatus');
+    msgStatus.textContent = 'Message sent! 🎉';
+    msgStatus.style.color = '#6e8efb';
+  });
+}
